@@ -1,17 +1,17 @@
 /** @enum {string} */
 export const enumColors = {
-    red: "red",
-    green: "green",
-    blue: "blue",
+    red: "cyan",
+    green: "purple",
+    blue: "yellow",
 
-    yellow: "yellow",
-    purple: "purple",
-    cyan: "cyan",
+    yellow: "blue",
+    purple: "green",
+    cyan: "red",
 
-    white: "white",
+    white: "black",
     uncolored: "uncolored",
 
-    black: "black",
+    black: "white",
 };
 
 /** @enum {string} */
@@ -38,23 +38,23 @@ for (const key in enumColorToShortcode) {
 
 /** @enum {string} */
 export const enumColorsToHexCode = {
-    [enumColors.red]: "#ff666a",
-    [enumColors.green]: "#78ff66",
-    [enumColors.blue]: "#66a7ff",
+    [enumColors.red]: "#00fcff", // #ff666a
+    [enumColors.green]: "#dd66ff", // #78ff66
+    [enumColors.blue]: "#fcf52a", // #66a7ff
 
     // red + green
-    [enumColors.yellow]: "#fcf52a",
+    [enumColors.yellow]: "#66a7ff", // #fcf52a
 
     // red + blue
-    [enumColors.purple]: "#dd66ff",
+    [enumColors.purple]: "#78ff66", // #dd66ff
 
     // blue + green
-    [enumColors.cyan]: "#00fcff",
+    [enumColors.cyan]: "#ff666a", // #00fcff
 
     // blue + green + red
-    [enumColors.white]: "#ffffff",
+    [enumColors.white]: "#31383a", // #ffffff
 
-    [enumColors.black]: "#31383a",
+    [enumColors.black]: "#ffffff", // #31383a
 
     [enumColors.uncolored]: "#aaaaaa",
 };
