@@ -1,17 +1,17 @@
 /** @enum {string} */
 export const enumColors = {
-    red: "cyan",
-    green: "purple",
-    blue: "yellow",
+    red: "red",
+    green: "green",
+    blue: "blue",
 
-    yellow: "blue",
-    purple: "green",
-    cyan: "red",
+    yellow: "yellow",
+    purple: "purple",
+    cyan: "cyan",
 
-    white: "black",
+    white: "white",
     uncolored: "uncolored",
 
-    black: "white",
+    black: "black",
 };
 
 /** @enum {string} */
