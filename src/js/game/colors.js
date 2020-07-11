@@ -38,6 +38,30 @@ for (const key in enumColorToShortcode) {
 
 /** @enum {string} */
 export const enumColorsToHexCode = {
+    [enumColors.red]: "#ff666a", // #ff666a
+    [enumColors.green]: "#78ff66", // #78ff66
+    [enumColors.blue]: "#66a7ff", // #66a7ff
+
+    // red + green
+    [enumColors.yellow]: "#fcf52a", // #fcf52a
+
+    // red + blue
+    [enumColors.purple]: "#dd66ff", // #dd66ff
+
+    // blue + green
+    [enumColors.cyan]: "#00fcff", // #00fcff
+
+    // blue + green + red
+    [enumColors.white]: "#ffffff", // #ffffff
+
+    [enumColors.black]: "#31383a", // #31383a
+
+    [enumColors.uncolored]: "#aaaaaa",
+};
+
+// color blind palette
+/** @enum {string} */
+export const enumColorsToHexCode2 = {
     [enumColors.red]: "#d55e00", // #ff666a
     [enumColors.green]: "#009e73", // #78ff66
     [enumColors.blue]: "#0072b2", // #66a7ff

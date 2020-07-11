@@ -80,7 +80,7 @@ export class ColorItem extends BaseItem {
         context.translate((w * dpi) / 2, (h * dpi) / 2);
         context.scale((dpi * w) / 12, (dpi * h) / 12);
 
-        if (SettingsStorage.enableColorBlindHelper) {
+        if (GameRoot.prototype.app.settings.getAllSettings().enableColorBlindHelper) {
             context.fillStyle = enumColorsToHexCode2[this.color];
         } else {
             context.fillStyle = enumColorsToHexCode[this.color];
