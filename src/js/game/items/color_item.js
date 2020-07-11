@@ -80,13 +80,13 @@ export class ColorItem extends BaseItem {
         context.translate((w * dpi) / 2, (h * dpi) / 2);
         context.scale((dpi * w) / 12, (dpi * h) / 12);
 
-        if (GameRoot.prototype.app.settings.getAllSettings().enableColorBlindHelper) {
+        /*if (GameRoot.prototype.app.settings.getAllSettings().enableColorBlindHelper) {
             context.fillStyle = enumColorsToHexCode2[this.color];
         } else {
             context.fillStyle = enumColorsToHexCode[this.color];
-        }
+        }*/
 
-        context.fillStyle = enumColorsToHexCode2[this.color];
+        context.fillStyle = enumColorsToHexCode[this.color];
         context.strokeStyle = THEME.items.outline;
         context.lineWidth = 2 * THEME.items.outlineWidth;
         context.beginCircle(2, -1, 3);

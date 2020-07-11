@@ -371,7 +371,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 } else {
                     context.fillStyle = enumColorsToHexCode[color];
                 }*/
-                context.fillStyle = enumColorsToHexCode2[color];
+                context.fillStyle = enumColorsToHexCode[color];
                 context.strokeStyle = THEME.items.outline;
                 context.lineWidth = THEME.items.outlineWidth;
 
