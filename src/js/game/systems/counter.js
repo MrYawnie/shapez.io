@@ -64,9 +64,9 @@ export class CounterSystem extends GameSystemWithFilter {
         context.globalAlpha = 1;
         const center = staticComp.getTileSpaceBounds().getCenter().toWorldSpace();
 
-        this.storageOverlaySprite.drawCached(parameters, center.x - 11, center.y + -7, 22, 14);
+        /*this.storageOverlaySprite.drawCached(parameters, center.x - 8, center.y + -7, 16, 14);*/
 
-        context.font = "bold 9px GameFont";
+        context.font = "bold 8.5px GameFont";
         context.textAlign = "center";
         context.fillStyle = "#64666e";
         context.fillText(counterComp.averageItemsPerSecond, center.x, center.y + 3);
