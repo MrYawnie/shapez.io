@@ -10,6 +10,7 @@ export const enumAnalyticsDataSource = {
     produced: "produced",
     stored: "stored",
     delivered: "delivered",
+    deliveredToStorage: "deliveredToStorage",
 };
 
 export class ProductionAnalytics extends BasicSerializableObject {
@@ -28,6 +29,7 @@ export class ProductionAnalytics extends BasicSerializableObject {
             [enumAnalyticsDataSource.produced]: [],
             [enumAnalyticsDataSource.stored]: [],
             [enumAnalyticsDataSource.delivered]: [],
+            [enumAnalyticsDataSource.deliveredToStorage]: [],
         };
 
         for (let i = 0; i < globalConfig.statisticsGraphSlices; ++i) {
@@ -36,6 +38,7 @@ export class ProductionAnalytics extends BasicSerializableObject {
 
         this.root.signals.shapeDelivered.add(this.onShapeDelivered, this);
         this.root.signals.itemProduced.add(this.onItemProduced, this);
+        this.root.signals.itemDeliveredToStorage.add(this.onItemDeliveredToStorage, this);
 
         this.lastAnalyticsSlice = 0;
     }
@@ -62,6 +65,16 @@ export class ProductionAnalytics extends BasicSerializableObject {
     }
 
     /**
+     * @param {number} uid
+     * @param {number} count
+     */
+    onItemDeliveredToStorage(uid, count) {
+        const key = uid.toString();
+        const entry = this.history[enumAnalyticsDataSource.deliveredToStorage];
+        entry[entry.length - 1][key] = (entry[entry.length - 1][key] || 0) + count;
+    }
+
+    /**
      * Starts a new time slice
      */
     startNewSlice() {
@@ -81,27 +94,27 @@ export class ProductionAnalytics extends BasicSerializableObject {
     /**
      * Returns the current rate of a given shape
      * @param {enumAnalyticsDataSource} dataSource
-     * @param {ShapeDefinition} definition
+     * @param {string} shapeKey
      */
-    getCurrentShapeRate(dataSource, definition) {
+    getCurrentShapeRate(dataSource, shapeKey) {
         const slices = this.history[dataSource];
-        return slices[slices.length - 2][definition.getHash()] || 0;
+        return slices[slices.length - 2][shapeKey] || 0;
     }
 
     /**
      * Returns the rate of a given shape, <historyOffset> frames ago
      * @param {enumAnalyticsDataSource} dataSource
-     * @param {ShapeDefinition} definition
+     * @param {string} shapeKey
      * @param {number} historyOffset
      */
-    getPastShapeRate(dataSource, definition, historyOffset) {
+    getPastShapeRate(dataSource, shapeKey, historyOffset) {
         assertAlways(
             historyOffset >= 0 && historyOffset < globalConfig.statisticsGraphSlices - 1,
             "Invalid slice offset: " + historyOffset
         );
 
         const slices = this.history[dataSource];
-        return slices[slices.length - 2 - historyOffset][definition.getHash()] || 0;
+        return slices[slices.length - 2 - historyOffset][shapeKey] || 0;
     }
 
     /**
