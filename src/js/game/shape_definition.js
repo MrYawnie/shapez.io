@@ -14,9 +14,7 @@ import {
     enumInvertedColors,
 } from "./colors";
 import { THEME } from "./theme";
-import { ApplicationSettings } from "../profile/application_settings";
 import { GameRoot } from "./root";
-import { SettingsState } from "../states/settings";
 
 const rusha = require("rusha");
 
@@ -123,8 +121,8 @@ export class ShapeDefinition extends BasicSerializableObject {
         /** @type {string} */
         this.cachedHash = null;
 
-        // Set on demand
-        this.bufferGenerator = null;
+        /** @type {GameRoot} */
+        this.root = null;
     }
 
     /**
@@ -366,7 +364,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 context.translate(centerQuadrantX, centerQuadrantY);
                 context.rotate(rotation);
 
-                /*if (GameRoot.prototype.app.settings.getAllSettings().enableColorBlindHelper) {
+                /*if (this.root.app.settings.getAllSettings().enableColorBlindHelper) {
                     context.fillStyle = enumColorsToHexCode2[color];
                 } else {
                     context.fillStyle = enumColorsToHexCode[color];
