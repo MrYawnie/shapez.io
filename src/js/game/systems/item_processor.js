@@ -10,6 +10,7 @@ import { ShapeItem } from "../items/shape_item";
 export class ItemProcessorSystem extends GameSystemWithFilter {
     constructor(root) {
         super(root, [ItemProcessorComponent]);
+        this.root = root;
     }
 
     update() {
@@ -243,7 +244,7 @@ export class ItemProcessorSystem extends GameSystemWithFilter {
                     resultColor = mixedColor;
                 }
                 outItems.push({
-                    item: new ColorItem(resultColor),
+                    item: new ColorItem(resultColor, this.root),
                 });
 
                 break;
@@ -350,7 +351,7 @@ export class ItemProcessorSystem extends GameSystemWithFilter {
                     const colorItem = /** @type {ColorItem} */ (items[0].item);
                     const newColor = enumInvertedColors[colorItem.color];
                     outItems.push({
-                        item: new ColorItem(newColor),
+                        item: new ColorItem(newColor, this.root),
                         requiredSlot: 0,
                     });
                 } else if (item.getItemType() === enumItemType.shape) {
