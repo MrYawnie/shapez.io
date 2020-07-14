@@ -189,7 +189,7 @@ export class HUDPinnedShapes extends BaseHUDPart {
         const definition = this.root.shapeDefinitionMgr.getShapeFromShortKey(key);
 
         const element = makeDiv(this.element, null, ["shape"]);
-        const canvas = definition.generateAsCanvas(120);
+        const canvas = definition.generateAsCanvas(120, this.root);
         element.appendChild(canvas);
 
         if (className) {

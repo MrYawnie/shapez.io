@@ -146,7 +146,7 @@ export class MapChunk {
         this.internalGeneratePatch(
             rng,
             colorPatchSize,
-            new ColorItem(rng.choice(availableColors), this.root)
+            new ColorItem(rng.choice(availableColors))
         );
     }
 
@@ -272,7 +272,7 @@ export class MapChunk {
      */
     generatePredefined(rng) {
         if (this.x === 0 && this.y === 0) {
-            this.internalGeneratePatch(rng, 2, new ColorItem(enumColors.red, this.root), 7, 7);
+            this.internalGeneratePatch(rng, 2, new ColorItem(enumColors.red), 7, 7);
             return true;
         }
         if (this.x === -1 && this.y === 0) {
@@ -287,7 +287,7 @@ export class MapChunk {
         }
 
         if (this.x === -1 && this.y === -1) {
-            this.internalGeneratePatch(rng, 2, new ColorItem(enumColors.green, this.root));
+            this.internalGeneratePatch(rng, 2, new ColorItem(enumColors.green));
             return true;
         }
 

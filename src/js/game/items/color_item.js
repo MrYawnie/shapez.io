@@ -30,12 +30,10 @@ export class ColorItem extends BaseItem {
 
     /**
      * @param {enumColors} color
-     * @param {GameRoot} root
      */
-    constructor(color, root) {
+    constructor(color) {
         super();
         this.color = color;
-        this.root = root;
         this.bufferGenerator = null;
     }
 
@@ -74,12 +72,13 @@ export class ColorItem extends BaseItem {
      * @param {number} w
      * @param {number} h
      * @param {number} dpi
+     * @param {GameRoot} root
      */
-    internalGenerateColorBuffer(canvas, context, w, h, dpi) {
+    internalGenerateColorBuffer(canvas, context, w, h, dpi, root) {
         context.translate((w * dpi) / 2, (h * dpi) / 2);
         context.scale((dpi * w) / 12, (dpi * h) / 12);
 
-        if (this.root.app.settings.getAllSettings().enableColorBlindHelper === true) {
+        if (root.app.settings.getAllSettings().enableColorBlindHelper === true) {
             context.fillStyle = enumColorsToHexCode2[this.color];
         } else {
             context.fillStyle = enumColorsToHexCode[this.color];

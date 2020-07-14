@@ -50,7 +50,7 @@ export class HUDShapeStatisticsHandle {
         if (visibility) {
             if (!this.shapeCanvas) {
                 // Create elements
-                this.shapeCanvas = this.definition.generateAsCanvas(100);
+                this.shapeCanvas = this.definition.generateAsCanvas(100, this.root);
                 this.shapeCanvas.classList.add("icon");
                 this.element.appendChild(this.shapeCanvas);
             }

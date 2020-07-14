@@ -109,9 +109,8 @@ export class ShapeDefinition extends BasicSerializableObject {
      *
      * @param {object} param0
      * @param {Array<ShapeLayer>=} param0.layers
-     * @param {GameRoot} root
      */
-    constructor({ layers = [] }, root) {
+    constructor({ layers = [] }) {
         super();
 
         /**
@@ -124,8 +123,6 @@ export class ShapeDefinition extends BasicSerializableObject {
 
         // Set on demand
         this.bufferGenerator = null;
-
-        this.root = root;
     }
 
     /**
@@ -159,7 +156,7 @@ export class ShapeDefinition extends BasicSerializableObject {
             layers.push(quads);
         }
 
-        const definition = new ShapeDefinition({ layers }, this.root);
+        const definition = new ShapeDefinition({ layers });
         // We know the hash so save some work
         definition.cachedHash = key;
         return definition;
@@ -314,15 +311,16 @@ export class ShapeDefinition extends BasicSerializableObject {
     /**
      * Generates this shape as a canvas
      * @param {number} size
+     * @param {GameRoot} root
      */
-    generateAsCanvas(size = 120) {
+    generateAsCanvas(size = 120, root) {
         const [canvas, context] = makeOffscreenBuffer(size, size, {
             smooth: true,
             label: "definition-canvas-cache-" + this.getHash(),
             reusable: false,
         });
 
-        this.internalGenerateShapeBuffer(canvas, context, size, size, 1);
+        this.internalGenerateShapeBuffer(canvas, context, size, size, 1, root);
         return canvas;
     }
 
@@ -333,8 +331,9 @@ export class ShapeDefinition extends BasicSerializableObject {
      * @param {number} w
      * @param {number} h
      * @param {number} dpi
+     * @param {GameRoot} root
      */
-    internalGenerateShapeBuffer(canvas, context, w, h, dpi) {
+    internalGenerateShapeBuffer(canvas, context, w, h, dpi, root) {
         context.translate((w * dpi) / 2, (h * dpi) / 2);
         context.scale((dpi * w) / 23, (dpi * h) / 23);
 
@@ -367,7 +366,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 context.translate(centerQuadrantX, centerQuadrantY);
                 context.rotate(rotation);
 
-                if (this.root.app.settings.getAllSettings().enableColorBlindHelper === true) {
+                if (root.app.settings.getAllSettings().enableColorBlindHelper === true) {
                     context.fillStyle = enumColorsToHexCode2[color];
                 } else {
                     context.fillStyle = enumColorsToHexCode[color];
@@ -474,7 +473,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 layerIndex -= 1;
             }
         }
-        return new ShapeDefinition({ layers: newLayers }, this.root);
+        return new ShapeDefinition({ layers: newLayers });
     }
 
     /**
@@ -488,7 +487,7 @@ export class ShapeDefinition extends BasicSerializableObject {
             quadrants.unshift(quadrants[3]);
             quadrants.pop();
         }
-        return new ShapeDefinition({ layers: newLayers }, this.root);
+        return new ShapeDefinition({ layers: newLayers });
     }
 
     /**
@@ -502,7 +501,7 @@ export class ShapeDefinition extends BasicSerializableObject {
             quadrants.push(quadrants[0]);
             quadrants.shift();
         }
-        return new ShapeDefinition({ layers: newLayers }, this.root);
+        return new ShapeDefinition({ layers: newLayers });
     }
 
     /**
@@ -560,7 +559,7 @@ export class ShapeDefinition extends BasicSerializableObject {
 
         newLayers.splice(4);
 
-        return new ShapeDefinition({ layers: newLayers }, this.root);
+        return new ShapeDefinition({ layers: newLayers });
     }
 
     /**
@@ -579,7 +578,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 }
             }
         }
-        return new ShapeDefinition({ layers: newLayers }, this.root);
+        return new ShapeDefinition({ layers: newLayers });
     }
 
     /**
@@ -596,7 +595,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 }
             }
         }
-        return new ShapeDefinition({ layers: newLayers }, this.root);
+        return new ShapeDefinition({ layers: newLayers });
     }
 
     /**
@@ -615,7 +614,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 }
             }
         }
-        return new ShapeDefinition({ layers: newLayers }, this.root);
+        return new ShapeDefinition({ layers: newLayers });
     }
 }
 ShapeDefinition.root = undefined;

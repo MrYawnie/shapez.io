@@ -215,7 +215,7 @@ export class HUDWaypoints extends BaseHUDPart {
 
         assert(ShapeDefinition.isValidShortKey(key), "Invalid short key: " + key);
         const definition = ShapeDefinition.fromShortKey(key);
-        const preRendered = definition.generateAsCanvas(48);
+        const preRendered = definition.generateAsCanvas(48, this.root);
         return (this.cachedKeyToCanvas[key] = preRendered);
     }
 

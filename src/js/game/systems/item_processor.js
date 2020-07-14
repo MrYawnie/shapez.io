@@ -244,7 +244,7 @@ export class ItemProcessorSystem extends GameSystemWithFilter {
                     resultColor = mixedColor;
                 }
                 outItems.push({
-                    item: new ColorItem(resultColor, this.root),
+                    item: new ColorItem(resultColor),
                 });
 
                 break;
@@ -351,7 +351,7 @@ export class ItemProcessorSystem extends GameSystemWithFilter {
                     const colorItem = /** @type {ColorItem} */ (items[0].item);
                     const newColor = enumInvertedColors[colorItem.color];
                     outItems.push({
-                        item: new ColorItem(newColor, this.root),
+                        item: new ColorItem(newColor),
                         requiredSlot: 0,
                     });
                 } else if (item.getItemType() === enumItemType.shape) {

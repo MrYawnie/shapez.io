@@ -128,7 +128,7 @@ export class BufferMaintainer {
             smooth: true,
         });
 
-        redrawMethod(canvas, context, w, h, dpi, additionalParams);
+        redrawMethod(canvas, context, w, h, dpi, this.root);
 
         parent.set(subKey, {
             canvas,

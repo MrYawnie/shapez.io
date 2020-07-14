@@ -106,7 +106,7 @@ export class HUDShop extends BaseHUDPart {
                 const container = makeDiv(handle.elemRequirements, null, ["requirement"]);
 
                 const shapeDef = this.root.shapeDefinitionMgr.getShapeFromShortKey(shape);
-                const shapeCanvas = shapeDef.generateAsCanvas(120);
+                const shapeCanvas = shapeDef.generateAsCanvas(120, this.root);
                 shapeCanvas.classList.add();
                 container.appendChild(shapeCanvas);
 

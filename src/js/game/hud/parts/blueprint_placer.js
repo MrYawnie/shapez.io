@@ -16,7 +16,7 @@ import { enumLayer } from "../../root";
 export class HUDBlueprintPlacer extends BaseHUDPart {
     createElements(parent) {
         const blueprintCostShape = this.root.shapeDefinitionMgr.getShapeFromShortKey(blueprintShape);
-        const blueprintCostShapeCanvas = blueprintCostShape.generateAsCanvas(80);
+        const blueprintCostShapeCanvas = blueprintCostShape.generateAsCanvas(80, this.root);
 
         this.costDisplayParent = makeDiv(parent, "ingame_HUD_BlueprintPlacer", [], ``);
 

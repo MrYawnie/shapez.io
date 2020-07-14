@@ -362,7 +362,7 @@ export class HubGoals extends BasicSerializableObject {
             layers.push(layer);
         }
 
-        const definition = new ShapeDefinition({ layers }, this.root);
+        const definition = new ShapeDefinition({ layers });
         return this.root.shapeDefinitionMgr.registerOrReturnHandle(definition);
     }
 
