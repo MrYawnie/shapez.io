@@ -37,7 +37,7 @@ for (const key in enumColorToShortcode) {
 }
 
 /** @enum {string} */
-const enumColorsToHexCode = {
+const enumColorsToHexCodeNormal = {
     [enumColors.red]: "#ff666a",
     [enumColors.green]: "#78ff66",
     [enumColors.blue]: "#66a7ff",
@@ -59,8 +59,9 @@ const enumColorsToHexCode = {
     [enumColors.uncolored]: "#aaaaaa",
 };
 
-const enumColorsToHexCode2 = {
-    [enumColors.red]: "#d55e00",
+/* L (red) cone deficiency */
+const enumColorsToHexCodeProtanopia = {
+    [enumColors.red]: "#ff0000",
     [enumColors.green]: "#009e73",
     [enumColors.blue]: "#0072b2",
 
@@ -68,7 +69,53 @@ const enumColorsToHexCode2 = {
     [enumColors.yellow]: "#f0e442",
 
     // red + blue
+    [enumColors.purple]: "#ff79dd",
+
+    // blue + green
+    [enumColors.cyan]: "#56b4e9",
+
+    // blue + green + red
+    [enumColors.white]: "#ffffff",
+
+    [enumColors.black]: "#31383a",
+
+    [enumColors.uncolored]: "#aaaaaa",
+};
+
+/* M (green) cone deficiency */
+const enumColorsToHexCodeDeuteranopia = {
+    [enumColors.red]: "#d55e00",
+    [enumColors.green]: "#00de73",
+    [enumColors.blue]: "#0072b2",
+
+    // red + green
+    [enumColors.yellow]: "#f0e442",
+
+    // red + blue
     [enumColors.purple]: "#cc79a7",
+
+    // blue + green
+    [enumColors.cyan]: "#56dbe9",
+
+    // blue + green + red
+    [enumColors.white]: "#ffffff",
+
+    [enumColors.black]: "#31383a",
+
+    [enumColors.uncolored]: "#aaaaaa",
+};
+
+/* S (blue) cone deficiency */
+const enumColorsToHexCodeTritanopia = {
+    [enumColors.red]: "#d55e00",
+    [enumColors.green]: "#00be46",
+    [enumColors.blue]: "#0072b2",
+
+    // red + green
+    [enumColors.yellow]: "#f0e442",
+
+    // red + blue
+    [enumColors.purple]: "#cc79ba",
 
     // blue + green
     [enumColors.cyan]: "#56b4e9",
@@ -230,15 +277,17 @@ export class Colors {
     }
 
     getColorEnumInUse(){
+        // TODO:
+        // Read setting and choose which enum to return
         if (this.root.app.settings.getAllSettings().enableColorBlindHelper === true) {
-            return enumColorsToHexCode2;
+            return enumColorsToHexCodeProtanopia;
         } else {
-            return enumColorsToHexCode;
+            return enumColorsToHexCodeNormal;
         }
     }
 
     setColorEnumInUse(){
-        // TODO
+        // TODO:
         // Cycle setting allowing to choose color pallettes
     }
 }
