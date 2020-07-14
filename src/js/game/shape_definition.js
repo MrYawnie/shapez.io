@@ -8,11 +8,13 @@ import { BasicSerializableObject, types } from "../savegame/serialization";
 import {
     enumColors,
     enumColorsToHexCode,
+    enumColorsToHexCode2,
     enumColorToShortcode,
     enumShortcodeToColor,
     enumInvertedColors,
 } from "./colors";
 import { THEME } from "./theme";
+import { GameRoot } from "./root";
 
 const rusha = require("rusha");
 
@@ -121,6 +123,9 @@ export class ShapeDefinition extends BasicSerializableObject {
 
         // Set on demand
         this.bufferGenerator = null;
+
+        /** @type {GameRoot} */
+        this.root = undefined;
     }
 
     /**
@@ -362,6 +367,11 @@ export class ShapeDefinition extends BasicSerializableObject {
                 context.translate(centerQuadrantX, centerQuadrantY);
                 context.rotate(rotation);
 
+                if (this.root.app.settings.getAllSettings().enableColorBlindHelper === true) {
+                    context.fillStyle = enumColorsToHexCode2[color];
+                } else {
+                    context.fillStyle = enumColorsToHexCode[color];
+                }
                 context.fillStyle = enumColorsToHexCode[color];
                 context.strokeStyle = THEME.items.outline;
                 context.lineWidth = THEME.items.outlineWidth;

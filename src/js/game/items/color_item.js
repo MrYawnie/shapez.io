@@ -3,8 +3,9 @@ import { smoothenDpi } from "../../core/dpi_manager";
 import { DrawParameters } from "../../core/draw_parameters";
 import { types } from "../../savegame/serialization";
 import { BaseItem, enumItemType } from "../base_item";
-import { enumColors, enumColorsToHexCode } from "../colors";
+import { enumColors, enumColorsToHexCode, enumColorsToHexCode2 } from "../colors";
 import { THEME } from "../theme";
+import { GameRoot } from "../root";
 
 export class ColorItem extends BaseItem {
     static getId() {
@@ -29,10 +30,12 @@ export class ColorItem extends BaseItem {
 
     /**
      * @param {enumColors} color
+     * @param {GameRoot} root
      */
-    constructor(color) {
+    constructor(color, root) {
         super();
         this.color = color;
+        this.root = root;
         this.bufferGenerator = null;
     }
 
@@ -76,7 +79,12 @@ export class ColorItem extends BaseItem {
         context.translate((w * dpi) / 2, (h * dpi) / 2);
         context.scale((dpi * w) / 12, (dpi * h) / 12);
 
-        context.fillStyle = enumColorsToHexCode[this.color];
+        if (this.root.app.settings.getAllSettings().enableColorBlindHelper === true) {
+            context.fillStyle = enumColorsToHexCode2[this.color];
+        } else {
+            context.fillStyle = enumColorsToHexCode[this.color];
+        }
+        //context.fillStyle = enumColorsToHexCode[this.color];
         context.strokeStyle = THEME.items.outline;
         context.lineWidth = 2 * THEME.items.outlineWidth;
         context.beginCircle(2, -1, 3);

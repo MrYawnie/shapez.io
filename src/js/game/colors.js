@@ -59,6 +59,28 @@ export const enumColorsToHexCode = {
     [enumColors.uncolored]: "#aaaaaa",
 };
 
+export const enumColorsToHexCode2 = {
+    [enumColors.red]: "#d55e00",
+    [enumColors.green]: "#009e73",
+    [enumColors.blue]: "#0072b2",
+
+    // red + green
+    [enumColors.yellow]: "#f0e442",
+
+    // red + blue
+    [enumColors.purple]: "#cc79a7",
+
+    // blue + green
+    [enumColors.cyan]: "#56b4e9",
+
+    // blue + green + red
+    [enumColors.white]: "#ffffff",
+
+    [enumColors.black]: "#31383a",
+
+    [enumColors.uncolored]: "#aaaaaa",
+};
+
 /** @enum {enumColors} */
 export const enumInvertedColors = {
     [enumColors.red]: enumColors.cyan,
