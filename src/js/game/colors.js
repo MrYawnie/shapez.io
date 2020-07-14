@@ -37,7 +37,7 @@ for (const key in enumColorToShortcode) {
 }
 
 /** @enum {string} */
-export const enumColorsToHexCode = {
+const enumColorsToHexCode = {
     [enumColors.red]: "#ff666a",
     [enumColors.green]: "#78ff66",
     [enumColors.blue]: "#66a7ff",
@@ -59,7 +59,7 @@ export const enumColorsToHexCode = {
     [enumColors.uncolored]: "#aaaaaa",
 };
 
-export const enumColorsToHexCode2 = {
+const enumColorsToHexCode2 = {
     [enumColors.red]: "#d55e00",
     [enumColors.green]: "#009e73",
     [enumColors.blue]: "#0072b2",
@@ -221,5 +221,24 @@ for (const colorA in enumColorMixingResults) {
         if (!enumColorMixingResults[colorA][colorB]) {
             assertAlways(false, "Color mixing of", colorA, "with", colorB, "is not defined");
         }
+    }
+}
+
+export class Colors {
+    constructor(root){
+        this.root = root;
+    }
+
+    getColorEnumInUse(){
+        if (this.root.app.settings.getAllSettings().enableColorBlindHelper === true) {
+            return enumColorsToHexCode2;
+        } else {
+            return enumColorsToHexCode;
+        }
+    }
+
+    setColorEnumInUse(){
+        // TODO
+        // Cycle setting allowing to choose color pallettes
     }
 }

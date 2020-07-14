@@ -7,8 +7,6 @@ import { Vector } from "../core/vector";
 import { BasicSerializableObject, types } from "../savegame/serialization";
 import {
     enumColors,
-    enumColorsToHexCode,
-    enumColorsToHexCode2,
     enumColorToShortcode,
     enumShortcodeToColor,
     enumInvertedColors,
@@ -366,12 +364,8 @@ export class ShapeDefinition extends BasicSerializableObject {
                 context.translate(centerQuadrantX, centerQuadrantY);
                 context.rotate(rotation);
 
-                if (root.app.settings.getAllSettings().enableColorBlindHelper === true) {
-                    context.fillStyle = enumColorsToHexCode2[color];
-                } else {
-                    context.fillStyle = enumColorsToHexCode[color];
-                }
-                //context.fillStyle = enumColorsToHexCode[color];
+                context.fillStyle = root.colors.getColorEnumInUse()[color];
+
                 context.strokeStyle = THEME.items.outline;
                 context.lineWidth = THEME.items.outlineWidth;
 
