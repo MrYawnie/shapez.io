@@ -219,6 +219,6 @@ export class ShapeDefinitionManager extends BasicSerializableObject {
             subShape => ({ subShape, color })
         ));
 
-        return this.registerOrReturnHandle(new ShapeDefinition({ layers: [shapeLayer] }));
+        return this.registerOrReturnHandle(new ShapeDefinition({ layers: [shapeLayer] }, this.root));
     }
 }

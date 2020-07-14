@@ -114,8 +114,6 @@ export class ShapeDefinition extends BasicSerializableObject {
     constructor({ layers = [] }, root) {
         super();
 
-        this.root = undefined;
-
         /**
          * The layers from bottom to top
          * @type {Array<ShapeLayer>} */
@@ -125,7 +123,9 @@ export class ShapeDefinition extends BasicSerializableObject {
         this.cachedHash = null;
 
         // Set on demand
-        this.bufferGenerator = root;
+        this.bufferGenerator = null;
+
+        this.root = root;
     }
 
     /**
@@ -159,7 +159,7 @@ export class ShapeDefinition extends BasicSerializableObject {
             layers.push(quads);
         }
 
-        const definition = new ShapeDefinition({ layers });
+        const definition = new ShapeDefinition({ layers }, this.root);
         // We know the hash so save some work
         definition.cachedHash = key;
         return definition;
@@ -367,12 +367,12 @@ export class ShapeDefinition extends BasicSerializableObject {
                 context.translate(centerQuadrantX, centerQuadrantY);
                 context.rotate(rotation);
 
-                /*if (this.root.app.settings.getAllSettings().enableColorBlindHelper === true) {
+                if (this.root.app.settings.getAllSettings().enableColorBlindHelper === true) {
                     context.fillStyle = enumColorsToHexCode2[color];
                 } else {
                     context.fillStyle = enumColorsToHexCode[color];
-                }*/
-                context.fillStyle = enumColorsToHexCode[color];
+                }
+                //context.fillStyle = enumColorsToHexCode[color];
                 context.strokeStyle = THEME.items.outline;
                 context.lineWidth = THEME.items.outlineWidth;
 
@@ -474,7 +474,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 layerIndex -= 1;
             }
         }
-        return new ShapeDefinition({ layers: newLayers });
+        return new ShapeDefinition({ layers: newLayers }, this.root);
     }
 
     /**
@@ -488,7 +488,7 @@ export class ShapeDefinition extends BasicSerializableObject {
             quadrants.unshift(quadrants[3]);
             quadrants.pop();
         }
-        return new ShapeDefinition({ layers: newLayers });
+        return new ShapeDefinition({ layers: newLayers }, this.root);
     }
 
     /**
@@ -502,7 +502,7 @@ export class ShapeDefinition extends BasicSerializableObject {
             quadrants.push(quadrants[0]);
             quadrants.shift();
         }
-        return new ShapeDefinition({ layers: newLayers });
+        return new ShapeDefinition({ layers: newLayers }, this.root);
     }
 
     /**
@@ -560,7 +560,7 @@ export class ShapeDefinition extends BasicSerializableObject {
 
         newLayers.splice(4);
 
-        return new ShapeDefinition({ layers: newLayers });
+        return new ShapeDefinition({ layers: newLayers }, this.root);
     }
 
     /**
@@ -579,7 +579,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 }
             }
         }
-        return new ShapeDefinition({ layers: newLayers });
+        return new ShapeDefinition({ layers: newLayers }, this.root);
     }
 
     /**
@@ -596,7 +596,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 }
             }
         }
-        return new ShapeDefinition({ layers: newLayers });
+        return new ShapeDefinition({ layers: newLayers }, this.root);
     }
 
     /**
@@ -615,6 +615,7 @@ export class ShapeDefinition extends BasicSerializableObject {
                 }
             }
         }
-        return new ShapeDefinition({ layers: newLayers });
+        return new ShapeDefinition({ layers: newLayers }, this.root);
     }
 }
+ShapeDefinition.root = undefined;
