@@ -109,9 +109,12 @@ export class ShapeDefinition extends BasicSerializableObject {
      *
      * @param {object} param0
      * @param {Array<ShapeLayer>=} param0.layers
+     * @param {GameRoot} root
      */
-    constructor({ layers = [] }) {
+    constructor({ layers = [] }, root) {
         super();
+
+        this.root = undefined;
 
         /**
          * The layers from bottom to top
@@ -122,10 +125,7 @@ export class ShapeDefinition extends BasicSerializableObject {
         this.cachedHash = null;
 
         // Set on demand
-        this.bufferGenerator = null;
-
-        /** @type {GameRoot} */
-        this.root = undefined;
+        this.bufferGenerator = root;
     }
 
     /**
