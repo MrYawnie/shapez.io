@@ -10,6 +10,7 @@ import { GameTime } from "./time/game_time";
 import { EntityManager } from "./entity_manager";
 import { GameSystemManager } from "./game_system_manager";
 import { GameHUD } from "./hud/hud";
+import { Colors } from "./colors";
 import { MapView } from "./map_view";
 import { Camera } from "./camera";
 import { InGameState } from "../states/ingame";
@@ -106,6 +107,9 @@ export class GameRoot {
 
         /** @type {GameHUD} */
         this.hud = null;
+
+        /** @type {Colors} */
+        this.colors = null;
 
         /** @type {GameSystemManager} */
         this.systemMgr = null;

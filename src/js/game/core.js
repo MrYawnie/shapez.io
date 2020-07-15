@@ -20,6 +20,7 @@ import { EntityManager } from "./entity_manager";
 import { GameSystemManager } from "./game_system_manager";
 import { HubGoals } from "./hub_goals";
 import { GameHUD } from "./hud/hud";
+import { Colors } from "./colors";
 import { KeyActionMapper } from "./key_action_mapper";
 import { GameLogic } from "./logic";
 import { MapView } from "./map_view";
@@ -95,6 +96,7 @@ export class GameCore {
         root.map = new MapView(root);
         root.logic = new GameLogic(root);
         root.hud = new GameHUD(root);
+        root.colors = new Colors(root);
         root.time = new GameTime(root);
         root.automaticSave = new AutomaticSave(root);
         root.soundProxy = new SoundProxy(root);
