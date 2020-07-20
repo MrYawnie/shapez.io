@@ -180,6 +180,19 @@ export const allApplicationSettings = [
          */
         (app, value) => null
     ),
+    new EnumSetting(
+        "colorBlindMode", {
+            options: ["normal","protanopia","deuteranopia","tritanopia"],
+            valueGetter: mode => mode,
+            textGetter: mode => T.settings.labels.colorBlindMode.modes[mode],
+            category: categoryApp,
+            restartRequired: false,
+            changeCb:
+                /**
+                 * @param {Application} app
+                 */
+                (app, id) => app.updateAfterUiScaleChanged(),
+        }),
 
     // GAME
     new BoolSetting("offerHints", categoryGame, (app, value) => {}),
@@ -271,6 +284,7 @@ class SettingsStorage {
         this.movementSpeed = "regular";
         this.language = "auto-detect";
         this.autosaveInterval = "two_minutes";
+        this.colorBlindMode = "normal";
 
         this.alwaysMultiplace = false;
         this.offerHints = true;
